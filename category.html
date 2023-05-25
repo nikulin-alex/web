@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{category.title}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<body>
+  {% include 'navup.html'%}
+  <div class="container my-3">
+    <div class="row">
+      <div class="col-md-8">
+  <h1>Категория: {{ category.title }}</h1>
+  <p>Количество новостей в категории: <span class="badge badge-primary">{{ news|length }}</span></p>
+  <hr>
+  {% for new in news %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ new.title }}</h5>
+      <p class="card-text">{{ new.text|truncate(30) }}</p>
+      <a href="{{ url_for('news_home', id=new.id) }}" class="btn btn-primary">Читать далее</a>
+    </div>
+    <div class="card-footer">
+      {% if new.created_date %}
+        <span class="card-link">Дата создания: {{ new.created_date.strftime('%d.%m.%Y') }}</span>
+      {% endif %}
+      {% if new.category %}
+        <span class="card-link">Категория: <a href="{{ url_for('news_in_category', id=new.category.id) }}">{{ new.category.title }}</a></span>
+      {% endif %}
+    </div>
+  </div>
+  {% else %}
+  <p class="card-text">Новостей пока нет!</p>
+  {% endfor %}
+      </div>
+      {% include 'side_navigation.html' %}
+    </div>
+  </div>
+</body>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <title>Новости</title>
+</head>
+<body>
+  <div id="wrapper">
+    <!-- Навигация -->
+    {% include 'navup.html'%}
+    
+    <!-- Контент страницы -->
+    <div class="container my-3">
+      <div class="row">
+        <div class="col-md-8">
+          <h1>Последние обновления на сайте</h1>
+          <hr>
+          {% for new in newslist %}
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">{{new.title}}</h5>
+              <p class="card-text">{{new.text | truncate(30)}}</p>
+              <a href= '/news/{{loop.index}}' class="btn btn-primary">Читать далее</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% include 'side_navigation.html' %}
+        </div>
+      </div>
+    </div>
+    <!-- Подвал -->
+    <footer id="footer" class="bg-dark text-white text-center py-3">
+      &copy; 2023 Новости. Все права защищены.
+    </footer>
+  </div>
+
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>

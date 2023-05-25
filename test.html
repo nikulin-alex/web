@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>тест</title>
+</head>
+<body>
+    {{23**2}}<br>
+    {{45 % 5}}<br>
+    {{2-2 == 0}}<br>
+    {%if id % 2 == 0 %}
+    Число четное
+    {%endif%}
+    <br>
+    {%for i in range(10)%}
+    {{i}}
+    {%if not loop.last%}
+    ,
+    {%else%}
+    !
+    {%endif%}
+    {%endfor%}
+</body>
